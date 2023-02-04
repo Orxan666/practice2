@@ -1,0 +1,38 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block main %}
+{% static 'assets/img/about-bg.jpg' as banner_image %}
+{% include 'includes/banner.html' with title="Blog" description="Blog" image=banner_image %}
+
+       <!-- Main Content-->
+       <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                {% for article in articles %}
+                
+                <div class="post-preview">
+                    <a href="{% url 'blog:blog-detail' id=article.id %}">
+                        <h2 class="post-title">{{article.title}}</h2>
+                        <h3 class="post-subtitle">{{article.description}}</h3>
+                    </a>
+                    <p class="post-meta">
+                   Posted by
+                        <a href="#!">{{article.author.name}}</a>
+                     {{article.created}}
+                    </p>
+                </div>
+                {% endfor %}
+         
+                <!-- Divider-->
+                <hr class="my-4" />
+
+                <!-- Divider-->
+                <!-- Pager-->
+                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main %}
